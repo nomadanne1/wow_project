@@ -58,10 +58,7 @@ public class BoardController {
 		//by은지, 멤버십회원 게시글 랜덤추출
 		Collections.shuffle(boardListAD);
 
-		List<Wish> wishList = wishS.wishHeart();
-//		System.out.println(wishList.size());
-//		System.out.println(wishList.size());
-//		System.out.println(wishList.size());														
+		List<Wish> wishList = wishS.wishHeart();														
 		
 		model.addAttribute("wishList", wishList);
 		
