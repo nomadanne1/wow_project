@@ -23,7 +23,7 @@
 		<id property="alertSeq" column="ALERT_SEQ"/>
 		<result property="alertContents" column="ALERT_CONTENTS" />
 	</resultMap>
-	<!-- SELECT LIST AD -->
+	<!--by은지, SELECT LIST AD -->
 	<select id="selectListAD" parameterType="int" resultType="Board">
 		SELECT B.*, C.RENAME_FILENAME FROM MSHIPDATA A 
 		LEFT OUTER JOIN SALES_POST B ON(B.ID = A.ID) 
@@ -31,7 +31,7 @@
 		WHERE NOT B.POST_NO is NULL
 	</select>
 	
-	<!-- SELECT LIST -->
+	<!--by은지, SELECT LIST -->
 	<select id="selectList" parameterType="map" resultType="Board">
 		<!-- SELECT * FROM (SELECT ROWNUM NUM, S.*FROM (SELECT * FROM SALES_POST ORDER BY POST_NO DESC)S) WHERE NUM BETWEEN 1 AND 8 -->
 		SELECT * FROM (SELECT ROWNUM NUM , S.* FROM (SELECT a.*,  b.RENAME_FILENAME FROM SALES_POST a LEFT OUTER JOIN IMAGES b ON a.POST_NO = b.POST_NO 
@@ -54,7 +54,7 @@
 		ORDER BY a.POST_NO DESC)S) WHERE NUM BETWEEN 1 AND 8 
 	</select>
 	
-	<!-- SELECT LIST MORE -->
+	<!--by은지, SELECT LIST MORE -->
 	<select id="selectListMore" parameterType="map" resultType="Board">
 		<!-- SELECT * FROM (SELECT ROWNUM NUM, S.*FROM (SELECT * FROM SALES_POST ORDER BY POST_NO DESC)S) WHERE NUM BETWEEN 8+(4*#{more}) AND 11+(4*#{more}) -->
 		<!-- SELECT * FROM (SELECT ROWNUM NUM , S.* FROM (SELECT a.*,  b.RENAME_FILENAME FROM SALES_POST a LEFT OUTER JOIN IMAGES b ON a.POST_NO = b.POST_NO ORDER BY a.POST_NO DESC)S) WHERE NUM BETWEEN 8+(4*#{more}) AND 11+(4*#{more}) -->
@@ -80,43 +80,51 @@
 		SELECT COUNT(*) CNT FROM SALES_POST
 	</select>
 
-	<!-- SELECT PAGE -->
+	<!--by은지, SELECT DETAIL PAGE -->
 	<select id="selectPage" parameterType="int" resultType="Board">
 		SELECT * FROM SALES_POST WHERE POST_NO = #{no}
 	</select>
 	
-	<!-- SELECT FILE -->
+	<!--by은지, SELECT FILE -->
 	<select id="selectFile" parameterType="int" resultType="Image">
 		SELECT * FROM IMAGES WHERE POST_NO = #{no}
 	</select>
 	
-	<!-- INSERT BOARD-->
+	<!--by은지, INSERT BOARD-->
 	<insert id="insertBoard" parameterType="Board">
 	{ CALL
 	BEGIN
-		INSERT INTO SALES_POST(POST_NO, POST_TITLE, POST_PRICE, POST_CONTENTS, POST_ADDRESS, POST_TAGS, ID, POST_CODE) VALUES(SALES_POST_SEQ.NEXTVAL, #{post_title}, #{post_price}, #{post_contents}, #{post_address}, #{post_tags}, #{id}, #{post_code});
-		INSERT INTO IMAGES (ORIGINAL_FILENAME, RENAME_FILENAME, FILE_PATH, POST_NO) VALUES(#{original_filename},#{rename_filename},#{file_path}, SALES_POST_SEQ.CURRVAL);
+		INSERT INTO SALES_POST(POST_NO, POST_TITLE, POST_PRICE, POST_CONTENTS, POST_ADDRESS, POST_TAGS, ID, POST_CODE) 
+		VALUES(SALES_POST_SEQ.NEXTVAL, #{post_title}, #{post_price}, #{post_contents}, #{post_address}, #{post_tags}, #{id}, #{post_code});
+		
+		INSERT INTO IMAGES (ORIGINAL_FILENAME, RENAME_FILENAME, FILE_PATH, POST_NO) 
+		VALUES(#{original_filename},#{rename_filename},#{file_path}, SALES_POST_SEQ.CURRVAL);
 	END
 	}
 	</insert>	
 	
-	<!-- INSERT BOARD - FILE -->
+	<!--by은지, INSERT BOARD - FILE -->
 	<insert id="insertFile" parameterType="Image">
 	</insert>
 	
-	<!-- UPDATE  -->
+	<!--by은지, UPDATE  -->
 	<update id="updateBoard" parameterType="Board">
 		UPDATE SALES_POST SET POST_TITLE=#{post_title}, POST_PRICE=#{post_price}, POST_CONTENTS=#{post_contents}, POST_ADDRESS=#{post_address} , POST_TAGS=#{post_tags}, POST_CODE=#{post_code} where POST_NO=#{post_no}	
 	</update>
 	
-	<!-- UPDATE POST_YN (ajax) -->
+	<!--by은지, UPDATE POST_YN (ajax) -->
 	<update id="update_YN" parameterType="map">
 		UPDATE SALES_POST SET POST_YN = #{onSaleUp} WHERE POST_NO = #{no}
 	</update>
 	
-	<!-- DELETE -->
+	<!--by은지, DELETE -->
 	<delete id="deleteBoard" parameterType="int">
-		DELETE FROM SALES_POST WHERE POST_NO = #{no}
+	{ CALL
+	BEGIN
+		DELETE FROM SALES_POST WHERE POST_NO = #{no};
+		DELETE FROM IMAGES WHERE POST_NO = #{no};
+	END
+	}
 	</delete>	
 	
 	<!-- 관리자페이지- 게시물관리 -->
