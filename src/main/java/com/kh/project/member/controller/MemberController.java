@@ -164,7 +164,7 @@ public class MemberController {
 		
 	}
 	
-//	// 나의 회원정보  (내정보 가져오기)
+//	// by은지, 나의 회원정보  (내정보 가져오기)
 //	@RequestMapping(value="myInfoUp.do", method=RequestMethod.GET)
 //	public String myInfoUpView(Model model) throws Exception{
 //		//아직 session정보가 없어서
@@ -180,11 +180,13 @@ public class MemberController {
 	@RequestMapping(value="myInfoUp.do", method=RequestMethod.POST)
 	public ModelAndView updateMember(Member member, ModelAndView mv)throws Exception{
 			String inputPw = member.getPassword();
+			
+			//by은지, 입력한 비밀번호 암호화 저장
 			String pw = pwdEncoder.encode(inputPw);	
 			member.setPassword(pw);
 		
 			memberService.updateMember(member);
-			System.out.println("수정"+memberService.updateMember(member));
+			//System.out.println("수정"+memberService.updateMember(member));
 			mv.setViewName("template/index");
 			return mv;
 	}
@@ -240,7 +242,7 @@ public class MemberController {
 		System.out.println("결과"+cnt);
 		
 		if(cnt == -1) {
-			//by은지, ★ 스프링 시큐리티 탈퇴 시 로그아웃 처리가 됨
+			//by은지, ★ 스프링 시큐리티 탈퇴 시  로그아웃 처리가 됨
 			SecurityContextHolder.clearContext();
 		}
 		else {

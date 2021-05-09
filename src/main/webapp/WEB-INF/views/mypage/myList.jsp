@@ -46,63 +46,120 @@
             <div id="listUp">
             </div>
         </div>
-        <button type="button" id="more" onclick="moreList();"class="btn btn-default">더보기</button>
+       <!--  <button type="button" id="more" onclick="moreList();"class="btn btn-default">더보기</button> -->
 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 <input type="hidden" name="${_csrf.headerName}" value="${_csrf.headerName}" />           
 <script>
-
 	var csrfHeaderName ="${_csrf.headerName}";
-	var csrfTokenValue="${_csrf.token}";
-	var more = 0;
+	var csrfTokenValue="${_csrf.token}"
+</script>
+<!--by은지, 스크롤링페이징  -->
+<script>
+var more = 0;	
+//by은지, 스크롤 이벤트 발생시 function()실행
+$(function(){$(window).scroll(function(){
+	
+	//by은지, (스크롤을 맨 밑으로 내렸을 때의 스크롤 길이 값)  == (문서의 길이) - (창의 길이)
+	if($(window).scrollTop() >= $(document).height() - $(window).height()){
 
-	function moreList(){	
+		more = more +1;
 		
-	 	var startNum = $("#listBody li").length;  
-		
-		more += 1;
-
 		$.ajax({
 			url : "myList.do",
 			type : "POST",
-			dataType : "json",
+			data : { more : more },
+			dataType: "json",
 			beforeSend : function(xhr){
 				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
 			},
-			data : {
-				more : more,
-				startNum:startNum
-			},
-			success : function(data){
-				if(startNum < 8){
-					$("#more").remove();
-				}else{ 
-					var addListHtml ="";
+			success: function(data){
+
+				var addListHtml ="";
+
 					addListHtml += "<div class='fixed_img_col' style='height:350px'>";
-					
-					if(startNum >= 8){
-							for(var i in data.list){
-								addListHtml += "<ul id='listBody'>";
-								addListHtml += "<li>";
-								addListHtml += "<span class='thumb'>";
-								addListHtml += "<em>"+data.list[i].post_code+"</em>";
-								addListHtml += "<a href='postSellerView.do?no="+data.list[i].post_no+"'>";
-								addListHtml += "<img class='img-rounded' src='${pageContext.request.contextPath}/resources/images/sample.jpg' alt=''/></span>";
-								addListHtml += "<Strong>"+decodeURIComponent(data.list[i].post_title)+"</Strong></a>";
-								addListHtml += "<p>"+decodeURIComponent(data.list[i].post_address)+"</p>";
-								addListHtml += " <p>"+data.list[i].post_price+"원"+"</p>";
-								addListHtml += "</li>";
-								addListHtml += "</ul>";	
-							}
-							addListHtml +="</div>";
-							$("#listUp").append(addListHtml);
-					}		
+				for(var i in data.list){
+				
+					addListHtml += "<ul>";
+					addListHtml += "<li><span class='thumb'><em>"+data.list[i].post_code+"</em>";
+				 	addListHtml += "<a href='postSellerView.do?no="+data.list[i].post_no+"'> ";
+				   	addListHtml += "<img class='img-rounded' src='${pageContext.request.contextPath}/resources/upload/b8851dbb-fbb1-4481-9e0e-1505ac1c7216_anne.png'></span>";
+				   	addListHtml += "<Strong>"+decodeURIComponent(data.list[i].post_title)+"</Strong> </a>";
+				   	addListHtml += "<p>"+decodeURIComponent(data.list[i].post_address)+"&nbsp;·&nbsp"+data.list[i].post_date+"</p>";
+				   	addListHtml += "<p id='price'>"+data.list[i].post_price+"원</p>";
+				   	addListHtml += "<button name='hbtn' id='hbtn' class='glyphicon glyphicon-heart-empty'></button>";
+				   	addListHtml += "</li>";
+				   	addListHtml += "</ul>";	
+				}
+					addListHtml += "</div>";
+	
+				if(data.list.length>0){
+						
+				 $("#listUp").append(addListHtml);
+				}else {
+					alert("다음게시글이 없습니다.");
 				}
 			},
-			error: function (request,status,errorData){   
+		    error: function (request,status,errorData){   
 		    	alert('error code: '+request.status+"\n"
 		    			+'message:' +request.reponseText+'\n'
 		    			+ 'error :'+  errorData);
 		    }
-		}) 
-	}
+				
+		}); // .ajax 닫기
+	} // if문 닫기
+
+});	
+});
+/* function moreList(){	
+
+ 	var startNum = $("#listBody li").length;  
+	
+	more += 1;
+
+	$.ajax({
+		url : "myList.do",
+		type : "POST",
+		dataType : "json",
+		beforeSend : function(xhr){
+			xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+		},
+		data : {
+			more : more,
+			startNum:startNum
+		},
+		success : function(data){
+			if(startNum < 8){
+				$("#more").remove();
+			}else{ 
+				var addListHtml ="";
+				addListHtml += "<div class='fixed_img_col' style='height:350px'>";
+				
+				if(startNum >= 8){
+						for(var i in data.list){
+		
+							addListHtml += "<ul id='listBody'>";
+							addListHtml += "<li>";
+							addListHtml += "<span class='thumb'>";
+							addListHtml += "<em>"+data.list[i].post_code+"</em>";
+							addListHtml += "<a href='postSellerView.do?no="+data.list[i].post_no+"'>";
+							addListHtml += "<img class='img-rounded' src='${pageContext.request.contextPath}/resources/images/sample.jpg' alt=''/></span>";
+							addListHtml += "<Strong>"+decodeURIComponent(data.list[i].post_title)+"</Strong></a>";
+							addListHtml += "<p>"+decodeURIComponent(data.list[i].post_address)+"</p>";
+							addListHtml += " <p>"+data.list[i].post_price+"원"+"</p>";
+							addListHtml += "</li>";
+							addListHtml += "</ul>";	
+						}
+							addListHtml +="</div>";
+						
+						$("#listUp").append(addListHtml);
+				}		
+			}
+		},
+		error: function (request,status,errorData){   
+		   	alert('error code: '+request.status+"\n"
+		   			+'message:' +request.reponseText+'\n'
+		   			+ 'error :'+  errorData);
+		}
+	}) 
+} */
 </script>        

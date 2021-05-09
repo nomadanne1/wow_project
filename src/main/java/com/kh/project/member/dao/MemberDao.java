@@ -37,23 +37,23 @@ public class MemberDao {
 		return cnt;
 	}
 	
-	// password match(본인확인)
+	// by은지, password match(본인확인)
 	public String pwMatch(String id) throws Exception {
 		String pwdEncoder = sqlSession.selectOne("Member.selectPw",id);
 		return pwdEncoder;
 	}
 	
-	// update member
+	// by은지, update member
 	public int updateMember (Member member) throws Exception {
 		return sqlSession.update("Member.updateMember", member);
 	}
 	
-	// check nickname -본인제외
+	// by은지, check nickname -본인제외
 	public int checkNickname(Member member) throws Exception{
 		return sqlSession.selectOne("Member.checkNickname",member);	
 	}
 	
-	// delete member
+	// by은지, delete member
 	public int deleteMember (String id) throws Exception{
 		return sqlSession.delete("Member.deleteMember",id);
 	}

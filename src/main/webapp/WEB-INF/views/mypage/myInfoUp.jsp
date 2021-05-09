@@ -7,7 +7,7 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-<!-- 카카오 지도 API -->
+<!--by은지, 카카오 지도 API -->
 <script
 	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
@@ -193,7 +193,7 @@
 	<div style="text-align: center;">
 		<button type="submit" class="btn" style="margin-bottom: 3%" id="updateSubmit">수정완료</button>
 		<a class="btn" style="margin-bottom: 3%" data-toggle="modal" data-target="#myModal">회원탈퇴</a>
-		<!-- Modal -->
+		<!-- by은지, 회원탈퇴 팝업창 Modal -->
 		<div class="modal fade" id="myModal" role="dialog">
 			<div class="modal-dialog">
 					<!-- Modal content-->
@@ -220,7 +220,7 @@
 
 
 
-<!-- 닉네임 중복체크 -->
+<!-- by은지, 닉네임 중복체크 -->
 <script>
 $(function(){ $("#upNickName").change(function(){
 	$("#niDupSuc").hide();
@@ -263,7 +263,7 @@ function nickcheck(){
 }
 </script>
 
-<!-- 이메일변경 클릭시 -> 인증번호버튼보이게 (hidden value="")-->
+<!--by은지, 이메일변경 클릭시 -> 인증번호버튼보이게 (hidden value="")-->
 <script>
 	$(function(){ $("#emailUpt").click(function(){
 		$("#sendEmail").css("display","block");
@@ -276,7 +276,7 @@ function nickcheck(){
 	});	
 </script>
 
-<!-- 이메일 인증  -->
+<!--by은지, 이메일 인증  -->
 <script>
 var authKey;
 $(function () { $("#sendEmail").click(function(){
@@ -327,7 +327,7 @@ $(function () {$("#authKeyC").click(function() {
 
 </script>
 
-<!-- 탈퇴하기 버튼클릭시 팝업창 -->
+<!--by은지, 회원탈퇴 (ajax)-->
 <script>
  $(function(){$('#alert').on('click',function(){
 		 var id = $("#id").val()
@@ -358,7 +358,7 @@ $(function () {$("#authKeyC").click(function() {
 </script>
 
 <script>
-// 비밀번호 일치여부
+//by은지, 비밀번호 일치여부
 $(function(){
     $('#upPw').keyup(function(){
       $('#checkPw').html('');
@@ -375,7 +375,7 @@ $(function(){
     });
 });
 
-//닉네임, 이메일인증, 이메일번호 확인
+//by은지, 수정시 닉네임, 이메일인증, 이메일번호 확인해야만 회원정보 수정 가능.
 $(function(){
 	$("#checkNiDup").click(function(){
 		$("input[name=checkNiBox]").val('y');

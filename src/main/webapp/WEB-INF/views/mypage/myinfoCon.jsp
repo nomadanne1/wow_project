@@ -22,7 +22,7 @@
 	<table
 		style="text-align: center; margin-right: auto; margin-left: auto; width: 30%;">
 		<tr>
-			<td><label for="usr">아이디:</label></td>
+			<td><label for="user">아이디:</label></td>
 			<td><input type="text" class="form-control" id="infoConId"
 				value="<sec:authentication property="principal.member.id"/>" readonly><br></td>
 		</tr>
@@ -49,15 +49,13 @@
 		var csrfHeaderName ="${_csrf.headerName}";
 		var csrfTokenValue="${_csrf.token}";
 	</script>
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-		<input type="hidden" name="${_csrf.headerName}" value="${_csrf.headerName}" />
+
 	<br><br><br><br><br>
 
 <script>
-// 본인확인-비밀번호일치
+//by은지, 본인확인-비밀번호일치
 function pwCheck(){
 	inputPw = $("#inputPw").val();
-			
 	$.ajax({
 		url: "myInfoCon.do",
 		type: "POST",
