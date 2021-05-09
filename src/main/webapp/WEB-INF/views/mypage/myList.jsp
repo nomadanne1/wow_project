@@ -85,7 +85,7 @@ $(function(){$(window).scroll(function(){
 				   	addListHtml += "<img class='img-rounded' src='${pageContext.request.contextPath}/resources/upload/b8851dbb-fbb1-4481-9e0e-1505ac1c7216_anne.png'></span>";
 				   	addListHtml += "<Strong>"+decodeURIComponent(data.list[i].post_title)+"</Strong> </a>";
 				   	addListHtml += "<p>"+decodeURIComponent(data.list[i].post_address)+"&nbsp;·&nbsp"+data.list[i].post_date+"</p>";
-				   	addListHtml += "<p id='price'>"+data.list[i].post_price+"원</p>";
+				   	addListHtml += "<p id='price' style='float:left'>"+data.list[i].post_price+"원</p>";
 				   	addListHtml += "<button name='hbtn' id='hbtn' class='glyphicon glyphicon-heart-empty'></button>";
 				   	addListHtml += "</li>";
 				   	addListHtml += "</ul>";	

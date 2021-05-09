@@ -50,15 +50,16 @@ public class MypageController {
 	@RequestMapping(value="myList.do", method=RequestMethod.POST)
 	public String myListView(Principal principal, String more) throws Exception{
 		
-		Map<String, String> map = new HashMap<String, String>();
-	
-		String Pid= principal.getName();
-;
-		map.put("more", more);
-		map.put("Pid", Pid);
+		//by은지, 로그인한 아이디.	
+		String id= principal.getName();
 		
+		//by은지, more값이랑 id값 map에 저장 *더보기페이징때는 dao에서 해줌.
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("more", more);
+		map.put("id", id);
+		
+		//by은지, more & id값 전달 -> 내가 쓴 글 리스트
 		List<Board> myBoardPage = mypageService.myBoardPage(map);
-		System.out.println(myBoardPage);
 		
 		//by은지, 전송용 최종 json객체
 		JSONObject sendJson = new JSONObject();
@@ -66,11 +67,14 @@ public class MypageController {
 		//by은지, JSONArray 객체를 생성하여 JSONObject 객체를 하나씩 담는다
 		JSONArray jarr = new JSONArray();
 		
+		//by은지, 날짜형식 지정
 		SimpleDateFormat sf = new SimpleDateFormat("MM-dd");
+		
 		//by은지, list를 jarr에 저장처리
 		for(Board board : myBoardPage) {
 			//by은지, board 정보 저장할 json객체 선언
 			JSONObject jboard = new JSONObject();
+			
 			jboard.put("post_code",board.getPost_code());
 			jboard.put("post_no",board.getPost_no());
 			
