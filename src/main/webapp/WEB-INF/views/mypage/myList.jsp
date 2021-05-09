@@ -42,6 +42,7 @@
                     </li> 
                  </c:forEach>    
                 </ul>
+            <!--by은지, + 게시글 들어갈 공간.-->
             </div>
             <div id="listUp">
             </div>
@@ -61,7 +62,8 @@ $(function(){$(window).scroll(function(){
 	
 	//by은지, (스크롤을 맨 밑으로 내렸을 때의 스크롤 길이 값)  == (문서의 길이) - (창의 길이)
 	if($(window).scrollTop() >= $(document).height() - $(window).height()){
-
+		
+		//by은지, 1, 2, 3, 4,... 
 		more = more +1;
 		
 		$.ajax({
