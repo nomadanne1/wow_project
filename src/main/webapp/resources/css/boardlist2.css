@@ -13,7 +13,7 @@
     /* a태그 마우스올리거나 누르면 밑줄효과 */
     a:hover,a:active,a:focus{text-decoration: underline;}
     /* width 1000px로 주고, 가운데 정렬 */
-    .wraps {width: 1200px; margin-left: 210px; }
+    .wraps {width: 1200px; margin-left: 20%; }
     /* 썸네일리스트부분div 왼쪽정렬, 왼쪽띄기, 크기, 패딩 지정  */
     .fixed_img_col li {float: left; margin-left: 50px; width: 200px; height: 350px; padding: 20px 15px;}
     .fixed_img_col li strong {font-size: 23px;}
@@ -34,4 +34,4 @@
     /* 게시물에서 하트 */
     #hbtn {border: none; background-color: white; font-size: 18px;}
     /* 더보기 버튼 */
-    #more {width: 700px; margin-left: 380px; margin-bottom:50px;}
+    #more {width: 700px; margin-left: 20%; margin-bottom:50px;}

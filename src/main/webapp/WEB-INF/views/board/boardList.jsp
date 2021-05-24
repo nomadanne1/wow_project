@@ -150,10 +150,12 @@ $(function(){
 			</c:forEach>
 		</ul>
 	</div>
-	<div id="morePage">
-	</div>
+	<ul>
+		<div id="morePage"></div>
+		<button type="button" id="more" class="btn btn-default">더보기</button>
+	</ul>
 </div>
-<button type="button" id="more" class="btn btn-default">더보기</button>
+
 <br />
 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 <input type="hidden" name="${_csrf.headerName}" value="${_csrf.headerName}" />
