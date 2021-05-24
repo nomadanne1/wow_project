@@ -37,7 +37,7 @@
         </div>       
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10" >
-                <button type="submit" class="btn" style="width:312px">로그인</button>
+                <button type="submit" class="btn" style="width:100%">로그인</button>
             </div>
            
         </div>
@@ -60,7 +60,7 @@
             <div style="margin-left: 25%; margin-top: 2%; margin-right: 20%; display:flex; flex-direction: row;">
 			<!-- 네이버 로그인 -->
             <div id="naver_id_login" style="text-align:center"><a href="${url}">
-            	<img width="250" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/>
+            	<img width="100%" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/>
             </a></div>
             </div>
             <div style="margin-left: 25%; margin-top: 3%;">

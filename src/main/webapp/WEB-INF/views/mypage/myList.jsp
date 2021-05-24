@@ -59,9 +59,10 @@
 var more = 0;	
 //by은지, 스크롤 이벤트 발생시 function()실행
 $(function(){$(window).scroll(function(){
-	
+
 	//by은지, (스크롤을 맨 밑으로 내렸을 때의 스크롤 길이 값)  == (문서의 길이) - (창의 길이)
 	if($(window).scrollTop() >= $(document).height() - $(window).height()){
+		//console.log(more);
 		
 		//by은지, 1, 2, 3, 4,... 
 		more = more +1;
